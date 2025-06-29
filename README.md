@@ -19,7 +19,7 @@
 
 > 📌 Ideal for: Bug hunters · Security auditors · Red teamers
 
-![screenshot](https://yourdomain.com/screenshot.png)
+![screenshot](XEfinder.PNG)
 
 ---
 
