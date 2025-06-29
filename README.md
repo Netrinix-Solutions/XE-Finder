@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://netrinix.com/wp-content/uploads/2024/05/netrinix-logo.png" width="180" alt="Netrindx Logo"/>
+  <img src="https://netrinix.com/wp-content/uploads/2024/05/netrinix-logo.png" width="180" alt="Netrinix Logo"/>
 </p>
 
 <h1 align="center">XE-Finder 🔍</h1>
-<p align="center">Professional Information & Security Scanner by Netrindx Solutions</p>
+<p align="center">Professional Information & Security Scanner by Netrinix Solutions</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Developed%20by-Netrindx%20Solutions-blue?style=for-the-badge"/>
@@ -15,7 +15,7 @@
 
 ## 🧠 Overview
 
-**XE-Finder** is a professional web reconnaissance suite developed by [Netrindx Solutions](https://netrinix.com). Designed for penetration testers and researchers, this modular tool performs deep analysis of target domains to uncover **vulnerabilities, subdomains, sensitive files, JavaScript endpoints**, and more.
+**XE-Finder** is a professional web reconnaissance suite developed by [Netrinix Solutions](https://netrinix.com). Designed for penetration testers and researchers, this modular tool performs deep analysis of target domains to uncover **vulnerabilities, subdomains, sensitive files, JavaScript endpoints**, and more.
 
 > 📌 Ideal for: Bug hunters · Security auditors · Red teamers
 
