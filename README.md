@@ -6,7 +6,7 @@
 <p align="center">Professional Information & Security Scanner by Netrinix Solutions</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Developed%20by-Netrindx%20Solutions-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Developed%20by-Netrinix%20Solutions-blue?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python"/>
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/>
 </p>
