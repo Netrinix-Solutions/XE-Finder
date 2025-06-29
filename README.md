@@ -1,163 +1,119 @@
-XE-Finder - Professional Infromation & Security Scanner
+<p align="center">
+  <img src="https://netrinix.com/wp-content/uploads/2024/05/netrinix-logo.png" width="180" alt="Netrindx Logo"/>
+</p>
 
-https://img.shields.io/badge/Developed%2520by-Netrindx%2520Solutions-blue?style=for-the-badge
-https://img.shields.io/badge/Python-3.8%252B-blue?style=for-the-badge&logo=python
-https://img.shields.io/badge/License-MIT-green?style=for-the-badge
+<h1 align="center">XE-Finder 🔍</h1>
+<p align="center">Professional Information & Security Scanner by Netrindx Solutions</p>
 
-https://screenshot.png
-Overview
+<p align="center">
+  <img src="https://img.shields.io/badge/Developed%20by-Netrindx%20Solutions-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python"/>
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/>
+</p>
 
-The Web Reconnaissance Suite is a professional security scanner developed by Netrindx Solutions for comprehensive web reconnaissance operations. This powerful tool enables security professionals to perform in-depth scanning and enumeration of web targets, identifying potential vulnerabilities and gathering critical intelligence.
+---
 
-With its modular design and comprehensive scanning capabilities, the Web Reconnaissance Suite is an essential tool for penetration testers, security researchers, and IT professionals conducting security assessments.
-Key Features
+## 🧠 Overview
 
-    JavaScript File Discovery: Identify all JavaScript files on a target domain
+**XE-Finder** is a professional web reconnaissance suite developed by [Netrindx Solutions](https://netrinix.com). Designed for penetration testers and researchers, this modular tool performs deep analysis of target domains to uncover **vulnerabilities, subdomains, sensitive files, JavaScript endpoints**, and more.
 
-    Subdomain Enumeration: Discover hidden subdomains using powerful wordlists
+> 📌 Ideal for: Bug hunters · Security auditors · Red teamers
 
-    Hidden Directory Scanning: Uncover concealed directories and paths
+![screenshot](https://yourdomain.com/screenshot.png)
 
-    Sensitive File Detection: Locate potentially sensitive files and endpoints
+---
 
-    Full Reconnaissance Mode: Comprehensive scan combining all reconnaissance modules
+## 🚀 Key Features
 
-    Custom Wordlist Support: Use your own specialized wordlists
+- 🔎 JavaScript File Discovery  
+- 🌐 Subdomain Enumeration  
+- 📁 Hidden Directory Scanning  
+- 🧾 Sensitive File Detection  
+- 🧠 Full Reconnaissance Mode  
+- 📄 Custom Wordlist Support  
+- 💾 Export Scan Results  
 
-    Results Export: Save findings to text files for further analysis
+---
 
-Installation
-Prerequisites
+## 📂 Scan Modules
 
-    Python 3.8+
+| Module | Function |
+|--------|----------|
+| **JavaScript Finder** | Detects all JS files & paths |
+| **Subdomain Discovery** | Brute-forces hidden subdomains |
+| **Directory Scanner** | Locates hidden folders |
+| **Sensitive File Search** | Detects exposed secrets/backups |
+| **Full Recon** | Runs all modules sequentially |
 
-    pip package manager
+---
 
-Setup Instructions
+## 📊 Sample Output
 
-    Clone the repository:
+[+] Found JS Files:
 
-bash
+    https://example.com/main.js
 
-git clone https://github.com/netrindx/web-reconnaissance-suite.git
-cd web-reconnaissance-suite
+    https://example.com/util.js
 
-    Install required dependencies:
+[+] Subdomains:
 
-bash
+    www.example.com
 
-pip install -r requirements.txt
+    dev.example.com
 
-    Run the scanner:
+[+] Sensitive Files:
 
-bash
+    https://example.com/.env
 
+    https://example.com/db-backup.zip
+
+
+---
+
+## 📁 Wordlists
+
+Default curated wordlists included:
+
+- `wordlists/subdomains.txt`  
+- `wordlists/directories.txt`  
+
+Custom wordlists can be specified via CLI options.
+
+---
+
+## 💬 Example Commands
+
+```bash
+# Interactive mode
 python scanner.py
 
-Usage
-Basic Operation
+# Full scan with output
+python scanner.py -u https://target.com -o result.txt --full-scan
 
-    Launch the scanner
+# Run specific module
+python scanner.py -u https://target.com -m subdomain
 
-    Enter the target URL when prompted
+🤝 Contributing
 
-    Specify the output file path for results
+We welcome community contributions!
 
-    Choose between default or custom wordlists
+# Fork & create your feature branch
+git checkout -b feature/amazing-feature
 
-    Select the desired scan type
+# Make changes & commit
+git commit -am 'Add amazing feature'
 
-Command Options
-Option	Description
--u, --url	Specify target URL directly
--o, --output	Set output file path
--m, --module	Select specific module to run
---subdomain-wordlist	Custom subdomain wordlist path
---directory-wordlist	Custom directory wordlist path
---full-scan	Perform full reconnaissance scan
-Example Commands
-bash
+# Push & open pull request
+git push origin feature/amazing-feature
 
-# Basic scan with interactive prompts
-python scanner.py
+Ensure code follows PEP8 and includes proper testing.
+⚖️ License
 
-# Directly scan a target with full reconnaissance
-python scanner.py -u https://example.com -o results.txt --full-scan
+This project is licensed under the MIT License.
+⚠️ Disclaimer
 
-# Run specific module (subdomain discovery)
-python scanner.py -u https://example.com -m subdomain
+This tool is intended for educational and authorized penetration testing only.
+Do not scan systems without proper permission.
+🧠 About Netrindx Solutions
 
-Scan Modules
-1. JavaScript File Finder
-
-Identifies all JavaScript files accessible on the target domain, which can reveal application structure and potential vulnerabilities.
-2. Subdomain Discovery
-
-Enumerates subdomains using DNS brute-forcing techniques with comprehensive wordlists.
-3. Hidden Directory Scanner
-
-Discovers hidden directories and paths that may contain sensitive information or administrative interfaces.
-4. Sensitive File Finder
-
-Locates potentially sensitive files such as configuration files, backups, and credential storage.
-5. Full Reconnaissance Scan
-
-Comprehensive scan combining all modules for complete target reconnaissance.
-Wordlists
-
-The scanner includes carefully curated default wordlists optimized for effective reconnaissance. Users can also provide custom wordlists for specialized scanning requirements.
-
-Default wordlists are located in:
-
-    wordlists/subdomains.txt
-
-    wordlists/directories.txt
-
-Sample Output
-text
-
-[+] Initiating Full Reconnaissance Scan
-[+] Starting JavaScript File Scan
-[+] Starting Subdomain Discovery
-
-[+] Scanning for subdomains on example.com
-[+] Loaded 15 subdomains for scanning
-[+] Found: www.example.com (93.184.216.34)
-[+] Found: mail.example.com (104.16.123.96)
-[+] Found: dev.example.com (192.0.78.25)
-
-[+] JavaScript Files Found:
-  - https://example.com/main.js
-  - https://example.com/analytics.js
-  - https://example.com/util.js
-
-[+] Sensitive Files Discovered:
-  - https://example.com/.env
-  - https://example.com/backup.zip
-
-Contribution
-
-We welcome contributions from the security community! To contribute:
-
-    Fork the repository
-
-    Create your feature branch (git checkout -b feature/your-feature)
-
-    Commit your changes (git commit -am 'Add some feature')
-
-    Push to the branch (git push origin feature/your-feature)
-
-    Open a pull request
-
-Please ensure your code follows PEP8 guidelines and includes appropriate tests.
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-Disclaimer
-
-This tool is intended for legal security testing and research purposes only. Never use it against systems without explicit permission. The developers assume no liability and are not responsible for any misuse or damage caused by this program.
-About Netrindx Solutions
-
-Netrindx Solutions is a cybersecurity firm specializing in offensive security research and defensive strategy development. We provide cutting-edge security solutions to organizations worldwide.
-
-Developed with ❤️ by the security team at Netrindx Solutions
+Netrinixx Solutions is a cybersecurity firm focused on red teaming, education, and infosec innovation. Our team builds high-impact tools for ethical hackers & enterprises.
