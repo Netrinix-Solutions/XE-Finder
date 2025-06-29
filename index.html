@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Reconnaissance Suite - Professional Security Scanner</title>
+    <style>
+        :root {
+            --primary: #0f1923;
+            --secondary: #1a2639;
+            --accent: #4fc3dc;
+            --text: #e6f1ff;
+            --highlight: #64ffda;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(79, 195, 220, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+        
+        .developer {
+            color: var(--highlight);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            display: block;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--highlight));
+            color: var(--primary);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(79, 195, 220, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(79, 195, 220, 0.5);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--highlight));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: rgba(26, 38, 57, 0.6);
+            border: 1px solid rgba(79, 195, 220, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(79, 195, 220, 0.2);
+        }
+        
+        .feature-card h3 {
+            color: var(--highlight);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .terminal {
+            background: var(--secondary);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            margin-right: 15px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+        
+        .terminal-title {
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .terminal-content {
+            color: var(--highlight);
+        }
+        
+        .terminal-content .command {
+            color: var(--accent);
+        }
+        
+        .terminal-content .output {
+            color: var(--text);
+            display: block;
+            margin-top: 10px;
+        }
+        
+        footer {
+            background: rgba(10, 15, 23, 0.8);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(79, 195, 220, 0.2);
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--highlight);
+        }
+        
+        .copyright {
+            color: rgba(230, 241, 255, 0.7);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(79, 195, 220, 0.5); }
+            to { text-shadow: 0 0 20px rgba(79, 195, 220, 0.8), 0 0 30px rgba(79, 195, 220, 0.6); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            .logo { font-size: 3rem; }
+            .section-title { font-size: 2rem; }
+            .btn { padding: 12px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    
+    <div class="container">
+        <header>
+            <div class="logo">Web Reconnaissance Suite</div>
+            <div class="tagline">Professional Security Scanner</div>
+            <span class="developer">Developed by <a href="https://netrinix.com" style="color: var(--highlight);">Netrinix Solutions</a></span>
+            <a href="https://github.com/Netrinix-Solutions/XE-Finder" class="btn">Download on GitHub</a>
+            <a href="#features" class="btn">Explore Features</a>
+        </header>
+        
+        <section id="features">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">🕵️</div>
+                    <h3>JavaScript File Finder</h3>
+                    <p>Discover all JavaScript files on target domains to analyze application structure and identify potential vulnerabilities.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🔍</div>
+                    <h3>Subdomain Discovery</h3>
+                    <p>Enumerate hidden subdomains using advanced brute-forcing techniques with customizable wordlists.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">📂</div>
+                    <h3>Hidden Directory Scanner</h3>
+                    <p>Uncover concealed directories and paths that may contain sensitive information or admin interfaces.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🔒</div>
+                    <h3>Sensitive File Finder</h3>
+                    <p>Locate critical files like configuration files, backups, and credential storage locations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>Full Reconnaissance Scan</h3>
+                    <p>Comprehensive scanning combining all modules for complete target reconnaissance.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">📁</div>
+                    <h3>Custom Wordlist Support</h3>
+                    <p>Use your own specialized wordlists for tailored scanning requirements.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="usage">
+            <h2 class="section-title">Getting Started</h2>
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-title">terminal</div>
+                </div>
+                <div class="terminal-content">
+                    <span class="command"># Clone the repository</span><br>
+                    <span class="output">git clone https://github.com/Netrinix-Solutions/XE-Finder.git</span><br><br>
+                    
+                    <span class="command"># Navigate to project directory</span><br>
+                    <span class="output">cd XE-Finder</span><br><br>
+                    
+                    <span class="command"># Install dependencies</span><br>
+                    <span class="output">pip install -r requirements.txt</span><br><br>
+                    
+                    <span class="command"># Run the scanner</span><br>
+                    <span class="output">python run.py</span><br><br>
+                    
+                    <span class="command"># Run full reconnaissance scan directly</span><br>
+                    <span class="output">python run.py -u https://example.com -o results.txt --full-scan</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="scan-types">
+            <h2 class="section-title">Scan Types</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>1. JavaScript File Finder</h3>
+                    <p>Identifies all JavaScript files accessible on the target domain</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>2. Subdomain Discovery</h3>
+                    <p>Enumerates subdomains using DNS brute-forcing techniques</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>3. Hidden Directory Scanner</h3>
+                    <p>Discovers hidden directories and paths</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>4. Sensitive File Finder</h3>
+                    <p>Locates potentially sensitive files</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>5. Full Reconnaissance Scan</h3>
+                    <p>Comprehensive scan combining all modules</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>6. Exit</h3>
+                    <p>Terminate the scanning session</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Web Reconnaissance Suite</div>
+            <p>Professional Security Scanner for Penetration Testers and Security Researchers</p>
+            <a href="https://netrinix.com" class="btn">Visit Netrinix Solutions</a>
+            <div class="copyright">© 2023 Netrinix Solutions. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Particle animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 150;
+        const colors = ['#4fc3dc', '#64ffda', '#3a506b', '#1c2541'];
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function createParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = particles[i].color;
+                        ctx.lineWidth = 0.2;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        function handleResize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', handleResize);
+        
+        createParticles();
+        animateParticles();
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
